@@ -1,10 +1,7 @@
 <template>
-  <div>
-      <System/>
-  </div>
+  <router-view></router-view>
 </template>
 
 <script setup>
-import System from './views/System.vue';
 
 </script>
