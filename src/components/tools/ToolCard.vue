@@ -2,22 +2,29 @@
   <div>
     <div class="cards-wrapper row">
       <div class="card-wrapper col-md-6 col-lg-4 align-center">
-        <div class="card btn-card" data-color="" data-url="{% url module.url %}">
+        <div class="card btn-card" :style="{ backgroundColor: '#' + card.color }" data-url="{% url module.url %}">
           <div class="card-body">
-            <h5 class="card-title"></h5>
+            <h5 class="card-title">{{ card.title }}</h5>
             <h6 class="card-subtitle mb-2"><span class="badge bg-primary"></span></h6>
-            <p class="card-text"></p>
+            <p class="card-text">{{ card.description }}</p>
           </div>
         </div>
       </div>
-      {% endfor %}
     </div>
   </div>
-  {% endblock %}
 
 </template>
 
-<script setup>
+<script>
+export default {
+  name: 'ToolCard',
+  props: {
+    card: {
+      type: Object,
+      required: true
+    },
+  },
+}
 
 </script>
 

@@ -1,0 +1,14 @@
+[
+  {
+    "code": "url_shortener",
+    "title": "URL Shortener",
+    "description": "Minimize URL length with ease. Perfect for sharing links with friends or on social media.",
+    "color": "934D99"
+  },
+  {
+    "code": "hours_calculator",
+    "title": "Hours calculator",
+    "description": "Calculate the hours.",
+    "color": "6F994D"
+  }
+]

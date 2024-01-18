@@ -20,13 +20,29 @@
         </a>
       </div>
       <div class="content">
-        asdasdasds
+        <ToolCard v-for="tool in tools" :card="tool" :key="tool.code" />
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
+<script>
+import ToolCard from "@/components/tools/ToolCard.vue";
+import toolsData from "@/api/tools.json";
+
+export default {
+  components: {
+    ToolCard
+  },
+  data() {
+    return {
+      tools: [],
+    };
+  },
+  mounted() {
+    this.tools = toolsData;
+  }
+}
 
 </script>
 
