@@ -3,12 +3,42 @@
     "code": "url_shortener",
     "title": "URL Shortener",
     "description": "Minimize URL length with ease. Perfect for sharing links with friends or on social media.",
-    "color": "934D99"
+    "color": "#934D99"
   },
   {
     "code": "hours_calculator",
     "title": "Hours calculator",
     "description": "Calculate the hours.",
-    "color": "6F994D"
+    "color": "#6F994D"
+  },
+  {
+    "code": "write_code_faster",
+    "title": "Write Code Faster",
+    "description": "Rewrite code as fast as you can, train muscle memory to write code faster :>",
+    "color": "#6F994D"
+  },
+  {
+    "code": "chat_gpt",
+    "title": "Chat GPT",
+    "description": "Just chat GPT.",
+    "color": "#6F994D"
+  },
+  {
+    "code": "own_chatbot",
+    "title": "Own chatbot",
+    "description": "This is an own chatbot, hosted on this server.",
+    "color": "#6F994D"
+  },
+  {
+    "code": "pdf_tools",
+    "title": "PDF Tools",
+    "description": "PDF OCR, Merge PDFs, and more.",
+    "color": "#6F994D"
+  },
+  {
+    "code": "pull",
+    "title": "Pull",
+    "description": "Create simple pulls",
+    "color": "#6F994D"
   }
 ]

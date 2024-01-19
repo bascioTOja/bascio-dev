@@ -1,26 +1,27 @@
 <template>
   <div id="content" class="main">
     <div class="container">
-      <div class="content-header row">
+      <div class="content-header">
         <div class="btn btn-link">
-          <a href="{% url 'tools:index' %}">bascio<span class="green-text">.dev</span></a>
+          <router-link to="/">bascio<span class="green-text">.dev</span></router-link>
         </div>
-        <span class="content-header-title"></span>
-        {% if user.is_authenticated %}
-        <div>
-          <a href="{% url 'logout' %}" class="btn btn-link" data-toggle="tooltip" title="Log out">
-            <span class="material-icons-two-tone">logout</span>
+        <span class="content-header-title">{{ $route.name }}</span>
+        <div v-if="logged">
+          <a class="btn btn-link" data-toggle="tooltip" title="Log out" @click="() => this.logged = false">
+            logout
           </a>
-          <a href="{ url 'account' }" class="btn btn-primary">
-            <span class="material-icons-two-tone">account_circle</span> Account
+          <a class="btn btn-primary" href="{ url 'account' }">
+            Account
           </a>
         </div>
-        <a href="{% url 'login' %}" class="btn btn-primary ">
-          <span class="material-icons-two-tone">login</span> Log in
-        </a>
+        <div v-else>
+          <a class="btn btn-primary" @click="() => this.logged = true">
+            Log in
+          </a>
+        </div>
       </div>
       <div class="content">
-        <ToolCard v-for="tool in tools" :card="tool" :key="tool.code" />
+        <ToolCard v-for="tool in tools" :key="tool.code" :card="tool"/>
       </div>
     </div>
   </div>
@@ -37,6 +38,7 @@ export default {
   data() {
     return {
       tools: [],
+      logged: false, // Temporary
     };
   },
   mounted() {
@@ -46,35 +48,38 @@ export default {
 
 </script>
 
-<style scoped lang="scss">
-  .container {
-    margin-top: 5vh;
-    min-height: 85vh;
-    background-color: var(--color-main-background);
-    border-radius: var(--default-border-radius);
-    -webkit-box-shadow: 0 6px 20px 0 var(--color-box-shadow);
-    -moz-box-shadow: 0 6px 20px 0 var(--color-box-shadow);
-    box-shadow: 0 6px 20px 0 var(--color-box-shadow);
-  }
+<style lang="scss" scoped>
+.container {
+  margin-top: 5vh;
+  min-height: 85vh;
+  background-color: var(--color-main-background);
+  border-radius: var(--default-border-radius);
+  -webkit-box-shadow: 0 6px 20px 0 var(--color-box-shadow);
+  -moz-box-shadow: 0 6px 20px 0 var(--color-box-shadow);
+  box-shadow: 0 6px 20px 0 var(--color-box-shadow);
+}
 
-  .content-header {
-    border-bottom-color: var(--color-border);
-    border-bottom-style: dashed;
-    padding: 10px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-content: center;
-    justify-content: space-between;
-    align-items: center
-  }
+.content-header {
+  border-bottom-color: var(--color-border);
+  border-bottom-style: dashed;
+  padding: 10px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
 
-  .content-header-title {
-    font-weight: bold;
-    font-size: calc(var(--default-font-size) * 1.5);
-  }
+.content-header-title {
+  font-weight: bold;
+  font-size: calc(var(--default-font-size) * 1.5);
+}
 
-  .content {
-    padding: 15px;
-  }
+.content {
+  padding: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  flex-direction: row;
+}
 </style>
