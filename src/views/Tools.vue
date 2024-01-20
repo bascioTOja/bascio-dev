@@ -5,7 +5,7 @@
         <div class="btn btn-link">
           <router-link to="/">bascio<span class="green-text">.dev</span></router-link>
         </div>
-        <span class="content-header-title">{{ $route.name }}</span>
+        <span class="content-header-title"><router-link to="/tools">tools</router-link> <span v-if="selectedCard">/ {{ selectedCard }}</span></span>
         <div v-if="logged">
           <a class="btn btn-link" data-toggle="tooltip" title="Log out" @click="() => this.logged = false">
             logout
@@ -21,7 +21,10 @@
         </div>
       </div>
       <div class="content">
-        <ToolCard v-for="tool in tools" :key="tool.code" :card="tool"/>
+        <router-view />
+        <template v-if="$route.name === 'tools'">
+          <ToolCard v-for="tool in tools" :key="tool.code" :card="tool"/>
+        </template>
       </div>
     </div>
   </div>
@@ -40,6 +43,11 @@ export default {
       tools: [],
       logged: false, // Temporary
     };
+  },
+  computed : {
+    selectedCard() {
+      return toolsData.find((tool) => tool.code === this.$route.name.replace("tools.", ""))?.title;
+    }
   },
   mounted() {
     this.tools = toolsData;
@@ -73,6 +81,11 @@ export default {
 .content-header-title {
   font-weight: bold;
   font-size: calc(var(--default-font-size) * 1.5);
+  text-transform: capitalize;
+}
+
+.router-link-active {
+  text-decoration: none;
 }
 
 .content {
@@ -81,5 +94,8 @@ export default {
   flex-wrap: wrap;
   align-items: stretch;
   flex-direction: row;
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 }
 </style>

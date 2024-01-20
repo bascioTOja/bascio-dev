@@ -1,5 +1,5 @@
 <template>
-  Test short URL
+  PDF Tools
 </template>
 
 <script setup>

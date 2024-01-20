@@ -1,5 +1,5 @@
 <template>
-  Test Hours calculator
+  Write Code Faster
 </template>
 
 <script setup>

@@ -1,6 +1,6 @@
 <template>
   <div class="card-wrapper col-md-6 col-lg-4 align-center">
-    <div :style="{ backgroundColor: card.color }" class="card btn-card" data-url="{% url module.url %}">
+    <div :style="{ backgroundColor: card.color }" class="card" @click="clickCard()">
       <div class="card-body">
         <h5 class="card-title">{{ card.title }}</h5>
         <h6 class="card-subtitle mb-2"><span class="badge bg-primary"></span></h6>
@@ -10,6 +10,8 @@
   </div>
 </template>
 <script>
+import router from "@/router";
+
 export default {
   name: 'ToolCard',
   props: {
@@ -18,6 +20,11 @@ export default {
       required: true
     },
   },
+  methods: {
+    clickCard() {
+      router.push({ name: 'tools.' + this.card.code})
+    }
+  }
 }
 
 </script>
@@ -26,15 +33,12 @@ export default {
 .card-wrapper {
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   min-height: 9rem;
 }
 
 .card {
   width: 18rem;
-}
-
-.btn-card {
   transition-timing-function: ease-out;
   transition-duration: 250ms;
   -webkit-transition-timing-function: ease-out;
@@ -43,7 +47,7 @@ export default {
   -moz-transition-duration: 250ms;
 }
 
-.btn-card:hover {
+.card:hover {
   opacity: .8;
   transform: scale(1.04);
   cursor: pointer;
