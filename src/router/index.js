@@ -1,10 +1,13 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router';
 
 import Tools from "@/views/Tools.vue";
 import Home from "@/views/Home.vue";
 
 const routes = [
-  {path: '/', name: 'Home', component: Home},
+  {path: '/', name: 'home', component: Home},
+  {path: '/login', name: 'login', component: () => import(/* webpackChunkName: "login" */ '@/views/auth/Login.vue')},
+  {path: '/forgot-password', name: 'forgot-password', component: () => import(/* webpackChunkName: "forgot-password" */ '@/views/auth/ForgotPassword.vue')},
+  {path: '/register', name: 'register', component: () => import(/* webpackChunkName: "register" */ '@/views/auth/Register.vue')},
   {
     path: '/tools',
     alias: '/t',
@@ -20,11 +23,11 @@ const routes = [
       {path: 'pulls', name: 'tools.pulls', component: () => import(/* webpackChunkName: "pulls" */ '@/views/tools/Pulls.vue')},
     ],
   },
-]
+];
 
 const router = createRouter({
   history: createWebHistory(),
   routes
-})
+});
 
-export default router
+export default router;
