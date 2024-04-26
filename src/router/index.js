@@ -8,6 +8,7 @@ const routes = [
   {path: '/login', name: 'login', component: () => import(/* webpackChunkName: "login" */ '@/views/auth/Login.vue')},
   {path: '/forgot-password', name: 'forgot-password', component: () => import(/* webpackChunkName: "forgot-password" */ '@/views/auth/ForgotPassword.vue')},
   {path: '/register', name: 'register', component: () => import(/* webpackChunkName: "register" */ '@/views/auth/Register.vue')},
+  {path: '/me', name: 'profile', component: () => import(/* webpackChunkName: "register" */ '@/views/auth/Profile.vue')},
   {
     path: '/tools',
     alias: '/t',
