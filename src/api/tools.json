@@ -6,6 +6,18 @@
     "color": "#934D99"
   },
   {
+    "code": "snake",
+    "title": "Snake",
+    "description": "Nice snake game.",
+    "color": "#934D99"
+  },
+  {
+    "code": "snake-3d",
+    "title": "Snake 3D",
+    "description": "Nice snake game, but in 3D.",
+    "color": "#934D99"
+  },
+  {
     "code": "hours-calculator",
     "title": "Hours calculator",
     "description": "Calculate the hours.",

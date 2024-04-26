@@ -15,9 +15,7 @@
           </a>
         </div>
         <div v-else>
-          <a class="btn btn-primary" @click="() => this.logged = true">
-            Log in
-          </a>
+          <router-link to="/login" class="btn btn-primary">Log in</router-link>
         </div>
       </div>
       <div class="content">
