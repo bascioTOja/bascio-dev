@@ -1,17 +1,20 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from '@/router'
 import axios from "axios";
 import {createPinia} from "pinia";
+import router from "@/router";
 
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
-const access = JSON.parse(localStorage.getItem('token'))?.access || null;
-if (access) {
-    axios.defaults.headers.common['Authorization'] = 'JWT ' + access;
+const accessToken = JSON.parse(localStorage.getItem('token'))?.access || null;
+if (accessToken) {
+    axios.defaults.headers.common['Authorization'] = 'JWT ' + accessToken;
 }
 
-createApp(App)
-    .use(createPinia())
-    .use(router)
-    .mount('#app')
+const pinia = createPinia();
+const app = createApp(App)
+
+app.use(pinia)
+app.use(router)
+
+app.mount('#app')

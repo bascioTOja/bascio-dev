@@ -6,13 +6,11 @@
           <router-link to="/">bascio<span class="green-text">.dev</span></router-link>
         </div>
         <span class="content-header-title"><router-link to="/tools">tools</router-link> <span v-if="selectedCard">/ {{ selectedCard }}</span></span>
-        <div v-if="logged">
-          <a class="btn btn-link" data-toggle="tooltip" title="Log out" @click="() => this.logged = false">
+        <div v-if="authStore.isLoggedIn">
+          <a class="btn btn-link" data-toggle="tooltip" title="Logout" @click="logOutHandler">
             logout
           </a>
-          <a class="btn btn-primary" href="{ url 'account' }">
-            Account
-          </a>
+          <router-link to="/me" class="btn btn-primary">Account</router-link>
         </div>
         <div v-else>
           <router-link to="/login" class="btn btn-primary">Log in</router-link>
@@ -20,7 +18,7 @@
       </div>
       <div class="content">
         <router-view />
-        <template v-if="$route.name === 'tools'">
+        <template v-if="route.name === 'tools'">
           <ToolCard v-for="tool in tools" :key="tool.code" :card="tool"/>
         </template>
       </div>
@@ -28,29 +26,29 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import ToolCard from "@/components/tools/ToolCard.vue";
 import toolsData from "@/api/tools.json";
+import {computed, onMounted, ref} from "vue";
+import {useRoute} from "vue-router";
+import { useAuthStore } from "@/stores/auth.store";
 
-export default {
-  components: {
-    ToolCard
-  },
-  data() {
-    return {
-      tools: [],
-      logged: false, // Temporary
-    };
-  },
-  computed : {
-    selectedCard() {
-      return toolsData.find((tool) => tool.code === this.$route.name.replace("tools.", ""))?.title;
-    }
-  },
-  mounted() {
-    this.tools = toolsData;
-  }
+const route = useRoute()
+const authStore = useAuthStore();
+
+const tools = ref([]);
+
+const selectedCard = computed(() => {
+  return toolsData.find((tool) => tool.code === route.name.replace("tools.", ""))?.title;
+})
+
+function logOutHandler () {
+  authStore.logout();
 }
+
+onMounted(() => {
+  tools.value = toolsData;
+})
 
 </script>
 

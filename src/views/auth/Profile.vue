@@ -13,7 +13,6 @@
         </div>
         <div>
           email: {{ user.email }}
-          {{ test }}
         </div>
       </div>
       <div class="text-center">
@@ -38,7 +37,7 @@ let user = ref({
 
 onMounted(async () => {
   const response = await axios
-      .get('v1/users/me/')
+      .get('users/me/')
       .catch((error) => console.error(error));
 
   if (response) {
