@@ -28,10 +28,10 @@
 
 <script setup>
 import ToolCard from "@/components/tools/ToolCard.vue";
-import toolsData from "@/api/tools.json";
 import {computed, onMounted, ref} from "vue";
 import {useRoute} from "vue-router";
 import { useAuthStore } from "@/stores/auth.store";
+import axios from "axios";
 
 const route = useRoute()
 const authStore = useAuthStore();
@@ -39,7 +39,8 @@ const authStore = useAuthStore();
 const tools = ref([]);
 
 const selectedCard = computed(() => {
-  return toolsData.find((tool) => tool.code === route.name.replace("tools.", ""))?.title;
+  return '----'
+  // return toolsData.find((tool) => tool.code === route.name.replace("tools.", ""))?.title;
 })
 
 function logOutHandler () {
@@ -47,7 +48,13 @@ function logOutHandler () {
 }
 
 onMounted(() => {
-  tools.value = toolsData;
+  axios.get('tools/').then((response) => {
+    if (response.status === 200) {
+      tools.value = response.data;
+    } else {
+      tools.value = [];
+    }
+  })
 })
 
 </script>
