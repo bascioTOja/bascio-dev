@@ -48,13 +48,17 @@ function logOutHandler () {
 }
 
 onMounted(() => {
-  axios.get('tools/').then((response) => {
-    if (response.status === 200) {
-      tools.value = response.data;
-    } else {
+  axios.get('tools/')
+    .then((response) => {
+      if (response.status === 200) {
+        tools.value = response.data;
+      } else {
+        tools.value = [];
+      }
+    })
+    .catch((error) => {
       tools.value = [];
-    }
-  })
+    })
 })
 
 </script>

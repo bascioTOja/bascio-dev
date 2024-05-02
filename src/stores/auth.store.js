@@ -41,7 +41,6 @@ export const useAuthStore = defineStore('authStore', () => {
 
         const localToken = JSON.parse(localStorage.getItem('token')) || null;
 
-        console.log(localToken);
         if (! localToken?.access || checkIsTokenExpired(localToken.access)) {
             resetAuth();
 
@@ -74,16 +73,20 @@ export const useAuthStore = defineStore('authStore', () => {
     }
 
     const getUser = async () => {
-        const response = await axios.get('users/me/');
+        return await axios.get('users/me/')
+            .then((response) => {
+                if (response?.status !== 200) {
+                    resetAuth();
+                    return false;
+                }
+                user.value = response.data;
 
-        if (response?.status !== 200) {
-            resetAuth();
-            return false;
-        }
-
-        user.value = response.data;
-
-        return true;
+                return true;
+            })
+            .catch((error) => {
+                resetAuth();
+                return false;
+            })
     }
 
     const resetAuth = () => {
