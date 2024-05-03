@@ -9,6 +9,7 @@ const routes = [
   {path: '/forgot-password', name: 'forgot-password', component: () => import(/* webpackChunkName: "forgot-password" */ '@/views/auth/ForgotPassword.vue')},
   {path: '/register', name: 'register', component: () => import(/* webpackChunkName: "register" */ '@/views/auth/Register.vue')},
   {path: '/me', name: 'profile', component: () => import(/* webpackChunkName: "register" */ '@/views/auth/Profile.vue')},
+  {path: '/snake', name: 'tools.snake', component: () => import(/* webpackChunkName: "short-url" */ '@/views/snake/Snake.vue')},
   {
     path: '/tools',
     alias: '/t',
@@ -16,7 +17,6 @@ const routes = [
     component: Tools,
     children: [
       {path: 'short-url', name: 'tools.url-shortener', component: () => import(/* webpackChunkName: "short-url" */ '@/views/tools/UrlShortener.vue')},
-      {path: 'snake', name: 'tools.snake', component: () => import(/* webpackChunkName: "short-url" */ '@/views/tools/Snake.vue')},
       {path: 'snake3d', name: 'tools.snake-3d', component: () => import(/* webpackChunkName: "short-url" */ '@/views/tools/Snake3D.vue')},
       {path: 'hours-calculator', name: 'tools.hours-calculator', component: () => import(/* webpackChunkName: "hours-calculator" */ '@/views/tools/HoursCalculator.vue')},
       {path: 'write-code-faster', name: 'tools.write-code-faster', component: () => import(/* webpackChunkName: "write-code-faster" */ '@/views/tools/WriteCodeFaster.vue')},

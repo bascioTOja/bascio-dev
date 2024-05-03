@@ -22,7 +22,12 @@ export default {
   },
   methods: {
     clickCard() {
-      router.push({ name: 'tools.' + this.card.code})
+      if (this.card.url_target) {
+        const route = router.resolve({ name: 'tools.' + this.card.code});
+        window.open(route.href, this.card.url_target);
+      } else {
+        router.push({ name: 'tools.' + this.card.code})
+      }
     }
   }
 }
