@@ -10,6 +10,7 @@ const routes = [
   {path: '/register', name: 'register', component: () => import(/* webpackChunkName: "register" */ '@/views/auth/Register.vue')},
   {path: '/me', name: 'profile', component: () => import(/* webpackChunkName: "register" */ '@/views/auth/Profile.vue')},
   {path: '/snake', name: 'tools.snake', component: () => import(/* webpackChunkName: "short-url" */ '@/views/snake/Snake.vue')},
+  {path: '/snake3d', name: 'tools.snake_3d', component: () => import(/* webpackChunkName: "short-url" */ '@/views/snake3D/Snake3D.vue')},
   {
     path: '/tools',
     alias: '/t',
@@ -17,7 +18,6 @@ const routes = [
     component: Tools,
     children: [
       {path: 'short-url', name: 'tools.url-shortener', component: () => import(/* webpackChunkName: "short-url" */ '@/views/tools/UrlShortener.vue')},
-      {path: 'snake3d', name: 'tools.snake-3d', component: () => import(/* webpackChunkName: "short-url" */ '@/views/tools/Snake3D.vue')},
       {path: 'hours-calculator', name: 'tools.hours-calculator', component: () => import(/* webpackChunkName: "hours-calculator" */ '@/views/tools/HoursCalculator.vue')},
       {path: 'write-code-faster', name: 'tools.write-code-faster', component: () => import(/* webpackChunkName: "write-code-faster" */ '@/views/tools/WriteCodeFaster.vue')},
       {path: 'chat-gpt', name: 'tools.chat-gpt', component: () => import(/* webpackChunkName: "chat-gpt" */ '@/views/tools/ChatGpt.vue')},
