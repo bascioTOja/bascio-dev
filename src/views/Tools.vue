@@ -3,23 +3,33 @@
     <div class="container">
       <div class="content-header">
         <div class="btn btn-link">
-          <router-link to="/">bascio<span class="green-text">.dev</span></router-link>
+          <router-link to="/">
+            bascio<span class="green-text">.dev</span>
+          </router-link>
         </div>
-        <span class="content-header-title"><router-link to="/tools">tools</router-link> <span v-if="selectedCard">/ {{ selectedCard }}</span></span>
+        <span class="content-header-title">
+          <router-link to="/tools">tools </router-link>
+          <span v-if="selectedCard">/ {{ selectedCard }}</span>
+        </span>
         <div v-if="authStore.isLoggedIn">
-          <a class="btn btn-link" data-toggle="tooltip" title="Logout" @click="logOutHandler">
+          <a
+            class="btn btn-link"
+            data-toggle="tooltip"
+            title="Logout"
+            @click="logOutHandler"
+          >
             logout
           </a>
-          <router-link to="/me" class="btn btn-primary">Account</router-link>
+          <router-link class="btn btn-primary" to="/me">Account</router-link>
         </div>
         <div v-else>
-          <router-link to="/login" class="btn btn-primary">Log in</router-link>
+          <router-link class="btn btn-primary" to="/login">Log in</router-link>
         </div>
       </div>
       <div class="content">
         <router-view />
         <template v-if="route.name === 'tools'">
-          <ToolCard v-for="tool in tools" :key="tool.code" :card="tool"/>
+          <ToolCard v-for="tool in tools" :key="tool.code" :card="tool" />
         </template>
       </div>
     </div>
@@ -27,28 +37,29 @@
 </template>
 
 <script setup>
-import ToolCard from "@/components/tools/ToolCard.vue";
-import {computed, onMounted, ref} from "vue";
-import {useRoute} from "vue-router";
-import { useAuthStore } from "@/stores/auth.store";
-import axios from "axios";
+import ToolCard from '@/components/tools/ToolCard.vue';
+import { computed, onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import { useAuthStore } from '@/stores/auth.store';
+import axios from 'axios';
 
-const route = useRoute()
+const route = useRoute();
 const authStore = useAuthStore();
 
 const tools = ref([]);
 
 const selectedCard = computed(() => {
-  return '----'
+  return '----';
   // return toolsData.find((tool) => tool.code === route.name.replace("tools.", ""))?.title;
-})
+});
 
-function logOutHandler () {
+function logOutHandler() {
   authStore.logout();
 }
 
 onMounted(() => {
-  axios.get('tools/')
+  axios
+    .get('tools/')
     .then((response) => {
       if (response.status === 200) {
         tools.value = response.data;
@@ -58,9 +69,8 @@ onMounted(() => {
     })
     .catch((error) => {
       tools.value = [];
-    })
-})
-
+    });
+});
 </script>
 
 <style lang="scss" scoped>
