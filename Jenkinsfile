@@ -1,20 +1,14 @@
 pipeline {
   agent any
   stages {
-    stage('download dependencies') {
+    stage('Initial') {
       steps {
+        echo 'Install dependencies...'
         sh 'npm ci'
       }
     }
 
-    stage('Check linting') {
-      steps {
-//         sh 'npm run lint'
-           sh 'echo TODO:lint'
-      }
-    }
-
-    stage('Check unit:test') {
+    stage('Test') {
       steps {
 //         sh 'npm run test:unit -- --ci --coverage'
            sh 'echo TODO:Test'
@@ -51,19 +45,18 @@ pipeline {
 }
 
 def deployApp() {
-  echo 'Starting deployment...'
     sshPublisher(
         publishers: [
             sshPublisherDesc(
                 configName: 'bascio.dev',
                 transfers: [
                     sshTransfer(
-                        cleanRemote: false,
+                        cleanRemote: true,
                         excludes: '',
                         execCommand: '',
                         execTimeout: 120000,
                         flatten: false,
-                        makeEmptyDirs: false,
+                        makeEmptyDirs: true,
                         noDefaultExcludes: false,
                         patternSeparator: '[, ]+',
                         remoteDirectory: '',
