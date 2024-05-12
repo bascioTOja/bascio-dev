@@ -68,8 +68,8 @@ def deployApp() {
                         patternSeparator: '[, ]+',
                         remoteDirectory: '',
                         remoteDirectorySDF: false,
-                        removePrefix: '',
-                        sourceFiles: 'dist/*'
+                        removePrefix: 'dist',
+                        sourceFiles: 'dist/**'
                     )
                 ],
                 usePromotionTimestamp: false,
