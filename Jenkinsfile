@@ -18,7 +18,7 @@ pipeline {
     stage('Build') {
       steps {
         echo 'Building project...'
-        sh 'npm run build'
+        sh 'npm run build:prod'
       }
     }
 
