@@ -4,7 +4,7 @@ import axios from 'axios';
 import { createPinia } from 'pinia';
 import router from '@/router';
 
-axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+axios.defaults.baseURL = import.meta.env.VITE_APP_API_URL;
 
 const accessToken = JSON.parse(localStorage.getItem('token'))?.access || null;
 if (accessToken) {
