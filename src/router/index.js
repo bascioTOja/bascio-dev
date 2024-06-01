@@ -8,40 +8,32 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: () =>
-      import(/* webpackChunkName: "login" */ '@/views/auth/Login.vue'),
+    component: () => import('@/views/auth/Login.vue'),
   },
   {
     path: '/forgot-password',
     name: 'forgot-password',
-    component: () =>
-      import(
-        /* webpackChunkName: "forgot-password" */ '@/views/auth/ForgotPassword.vue'
-      ),
+    component: () => import('@/views/auth/ForgotPassword.vue'),
   },
   {
     path: '/register',
     name: 'register',
-    component: () =>
-      import(/* webpackChunkName: "register" */ '@/views/auth/Register.vue'),
+    component: () => import('@/views/auth/Register.vue'),
   },
   {
     path: '/me',
     name: 'profile',
-    component: () =>
-      import(/* webpackChunkName: "register" */ '@/views/auth/Profile.vue'),
+    component: () => import('@/views/auth/Profile.vue'),
   },
   {
     path: '/snake',
     name: 'tools.snake',
-    component: () =>
-      import(/* webpackChunkName: "short-url" */ '@/views/snake/Snake.vue'),
+    component: () => import('@/views/snake/Snake.vue'),
   },
   {
     path: '/snake3d',
     name: 'tools.snake_3d',
-    component: () =>
-      import(/* webpackChunkName: "short-url" */ '@/views/snake3D/Snake3D.vue'),
+    component: () => import('@/views/snake3D/Snake3D.vue'),
   },
   {
     path: '/tools',
@@ -52,56 +44,37 @@ const routes = [
       {
         path: 'short-url',
         name: 'tools.url-shortener',
-        component: () =>
-          import(
-            /* webpackChunkName: "short-url" */ '@/views/tools/UrlShortener.vue'
-          ),
+        component: () => import('@/views/tools/UrlShortener.vue'),
       },
       {
         path: 'hours-calculator',
         name: 'tools.hours-calculator',
-        component: () =>
-          import(
-            /* webpackChunkName: "hours-calculator" */ '@/views/tools/HoursCalculator.vue'
-          ),
+        component: () => import('@/views/tools/HoursCalculator.vue'),
       },
       {
         path: 'write-code-faster',
         name: 'tools.write-code-faster',
-        component: () =>
-          import(
-            /* webpackChunkName: "write-code-faster" */ '@/views/tools/WriteCodeFaster.vue'
-          ),
+        component: () => import('@/views/tools/WriteCodeFaster.vue'),
       },
       {
         path: 'chat-gpt',
         name: 'tools.chat-gpt',
-        component: () =>
-          import(
-            /* webpackChunkName: "chat-gpt" */ '@/views/tools/ChatGpt.vue'
-          ),
+        component: () => import('@/views/tools/ChatGpt.vue'),
       },
       {
         path: 'own-chatbot',
         name: 'tools.own-chatbot',
-        component: () =>
-          import(
-            /* webpackChunkName: "own-chatbot" */ '@/views/tools/OwnChatbot.vue'
-          ),
+        component: () => import('@/views/tools/OwnChatbot.vue'),
       },
       {
         path: 'pdf-tools',
         name: 'tools.pdf-tools',
-        component: () =>
-          import(
-            /* webpackChunkName: "pdf-tools" */ '@/views/tools/PdfTools.vue'
-          ),
+        component: () => import('@/views/tools/PdfTools.vue'),
       },
       {
         path: 'pulls',
         name: 'tools.pulls',
-        component: () =>
-          import(/* webpackChunkName: "pulls" */ '@/views/tools/Pulls.vue'),
+        component: () => import('@/views/tools/Pulls.vue'),
       },
     ],
   },
