@@ -4,7 +4,9 @@ pipeline {
     stage('Initial') {
       steps {
         echo 'Install dependencies...'
-        sh 'npm ci'
+        nodejs(nodeJSInstallationName: 'MainNode') {
+            sh 'npm ci'
+        }
       }
     }
 
@@ -18,7 +20,9 @@ pipeline {
     stage('Build') {
       steps {
         echo 'Building project...'
-        sh 'npm run build:prod'
+        nodejs(nodeJSInstallationName: 'MainNode') {
+            sh 'npm run build:prod'
+        }
       }
     }
 
