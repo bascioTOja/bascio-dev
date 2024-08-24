@@ -47,6 +47,11 @@ const routes = [
         component: () => import('@/views/tools/UrlShortener.vue'),
       },
       {
+        path: 'compound-interest-calculator',
+        name: 'tools.compound-interest-calculator',
+        component: () => import('@/views/tools/CompoundInterestCalculator.vue'),
+      },
+      {
         path: 'hours-calculator',
         name: 'tools.hours-calculator',
         component: () => import('@/views/tools/HoursCalculator.vue'),
