@@ -84,7 +84,6 @@
             font-weight: bold;
         }
 
-
         a {
             color: var(--color-main-text)
         }
@@ -114,6 +113,34 @@
 
         .form-label {
             margin-bottom: 0.15rem;
+        }
+
+        .input-group-text {
+            background-color: var(--color-main-background);
+            color: var(--color-main-text);
+            border-width: var(--default-border-width);
+            border-radius: var(--default-border-radius);
+            border-color: var(--color-border);
+            border-right: 0;
+        }
+
+        .form-select {
+            background-color: var(--color-main-background);
+            color: var(--color-main-text);
+            border-width: var(--default-border-width);
+            border-radius: var(--default-border-radius);
+            border-color: var(--color-border);
+        }
+
+        .form-select:hover {
+            border-color: var(--green);
+        }
+
+        .form-select:focus {
+            border-color: var(--green);
+            background-color: var(--color-main-background);
+            box-shadow: 0 0 0;
+            color: var(--color-main-text);
         }
 
         .alert-danger {
