@@ -65,6 +65,7 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth.store';
 import { ref } from 'vue';
+import router from '@/router';
 
 let username_is_valid = ref(true);
 let password_is_valid = ref(true);
@@ -76,11 +77,14 @@ const credentials = ref({
 
 const doLogin = async () => {
   const authStore = useAuthStore();
-
-  await authStore.login({
+  const loggedIn = await authStore.login({
     username: credentials.value.username,
     password: credentials.value.password,
   });
+
+  if (loggedIn) {
+    await router.push('/tools');
+  }
 };
 </script>
 
