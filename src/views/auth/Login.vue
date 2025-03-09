@@ -14,7 +14,9 @@
           v-if="!username_is_valid || !password_is_valid"
           class="alert alert-danger"
           role="alert"
-        ></div>
+        >
+          Invalid credentials
+        </div>
         <div class="mb-3">
           <label class="form-label" for="username">Username</label>
           <input
@@ -28,7 +30,7 @@
             }"
           />
           <div v-if="!username_is_valid" class="invalid-feedback">
-            {{ credentials.username }}
+            <!--            {{ credentials.username }}-->
           </div>
         </div>
         <div class="mb-3">
@@ -44,7 +46,7 @@
             }"
           />
           <div v-if="!password_is_valid" class="invalid-feedback">
-            {{ credentials.password }}
+            <!--            {{ credentials.password }}-->
           </div>
         </div>
         <button class="btn btn-primary btn-login" name="login" type="submit">
@@ -63,12 +65,14 @@
 </template>
 
 <script setup>
+import { useNotification } from 'naive-ui';
 import { useAuthStore } from '@/stores/auth.store';
 import { ref } from 'vue';
 import router from '@/router';
 
-let username_is_valid = ref(true);
-let password_is_valid = ref(true);
+const notification = useNotification();
+const username_is_valid = ref(true);
+const password_is_valid = ref(true);
 
 const credentials = ref({
   username: '',
@@ -84,6 +88,15 @@ const doLogin = async () => {
 
   if (loggedIn) {
     await router.push('/tools');
+  } else {
+    notification['error']({
+      content: 'Error',
+      meta: 'Invalid credentials',
+      duration: 2500,
+      keepAliveOnHover: true,
+    });
+    username_is_valid.value = false;
+    password_is_valid.value = false;
   }
 };
 </script>

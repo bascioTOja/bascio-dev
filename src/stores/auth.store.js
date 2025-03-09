@@ -8,6 +8,7 @@ export const useAuthStore = defineStore('authStore', () => {
   const session = ref(null);
   const user = ref(null);
   const isLoggedIn = ref(false);
+  const initialized = ref(false);
 
   const login = async ({ username, password }) => {
     const response = await axios
@@ -16,12 +17,14 @@ export const useAuthStore = defineStore('authStore', () => {
         password: password,
       })
       .catch((error) => {
-        console.log(error);
+        initialized.value = true;
+        return false;
       });
 
     if (response?.status !== 200) {
       resetAuth();
 
+      initialized.value = true;
       return false;
     }
 
@@ -32,12 +35,14 @@ export const useAuthStore = defineStore('authStore', () => {
     axios.defaults.headers.common['Authorization'] =
       'JWT ' + token.value.access;
     await getUser();
+    initialized.value = true;
 
     return true;
   };
 
   const loginFromSession = async () => {
     if (isLoggedIn.value && user.value && isAuthenticated()) {
+      initialized.value = true;
       return true;
     }
 
@@ -46,6 +51,7 @@ export const useAuthStore = defineStore('authStore', () => {
     if (!localToken?.access || checkIsTokenExpired(localToken.access)) {
       resetAuth();
 
+      initialized.value = true;
       return false;
     }
 
@@ -54,6 +60,7 @@ export const useAuthStore = defineStore('authStore', () => {
     axios.defaults.headers.common['Authorization'] =
       'JWT ' + token.value.access;
     isLoggedIn.value = await getUser();
+    initialized.value = true;
 
     return isLoggedIn.value;
   };
@@ -143,5 +150,6 @@ export const useAuthStore = defineStore('authStore', () => {
     session,
     user,
     isLoggedIn,
+    initialized,
   };
 });

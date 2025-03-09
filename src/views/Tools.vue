@@ -8,23 +8,36 @@
           </router-link>
         </div>
         <span class="content-header-title">
-          <router-link to="/tools">tools </router-link>
-          <span v-if="selectedCard">/ {{ selectedCard }}</span>
+          <n-breadcrumb :theme-overrides="{ common: { fontSize: 17 } }">
+            <n-breadcrumb-item>
+              <router-link to="/tools">tools</router-link>
+            </n-breadcrumb-item>
+            <n-breadcrumb-item v-if="selectedCard">
+              {{ selectedCard }}
+            </n-breadcrumb-item>
+          </n-breadcrumb>
         </span>
-        <div v-if="authStore.isLoggedIn">
-          <a
-            class="btn btn-link"
-            data-toggle="tooltip"
-            title="Logout"
-            @click="logOutHandler"
-          >
-            logout
-          </a>
-          <router-link class="btn btn-primary" to="/me">Account</router-link>
-        </div>
-        <div v-else>
-          <router-link class="btn btn-primary" to="/login">Log in</router-link>
-        </div>
+        <n-space vertical>
+          <n-skeleton
+            v-if="!authStore.initialized"
+            round="true"
+            :width="136.25"
+            size="medium"
+          />
+          <div v-else-if="authStore.isLoggedIn">
+            <n-button text class="btn-logout" @click="logOutHandler">
+              logout
+            </n-button>
+            <router-link to="/me">
+              <n-button type="primary">Account</n-button>
+            </router-link>
+          </div>
+          <div v-else>
+            <router-link to="/login">
+              <n-button type="primary">Log in</n-button>
+            </router-link>
+          </div>
+        </n-space>
       </div>
       <div class="content">
         <router-view />
@@ -42,6 +55,13 @@ import { computed, onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useAuthStore } from '@/stores/auth.store';
 import axios from 'axios';
+import {
+  NBreadcrumb,
+  NBreadcrumbItem,
+  NButton,
+  NSkeleton,
+  NSpace,
+} from 'naive-ui';
 
 const route = useRoute();
 const authStore = useAuthStore();
@@ -101,10 +121,6 @@ onMounted(() => {
   text-transform: capitalize;
 }
 
-.router-link-active {
-  text-decoration: none;
-}
-
 .content {
   padding: 15px;
   display: flex;
@@ -114,5 +130,9 @@ onMounted(() => {
   @media (max-width: 768px) {
     justify-content: center;
   }
+}
+
+.btn-logout {
+  margin-right: 10px;
 }
 </style>
