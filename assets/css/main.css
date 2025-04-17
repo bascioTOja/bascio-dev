@@ -1,0 +1,110 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme static {
+    --font-sans: 'Quicksand', sans-serif;
+    --ui-bg: #171717;
+    --ui-border: #3b3b3b;
+
+    --ui-text: #bfbfbf;
+
+    --default-font-size: 15px;
+    --default-border-radius: 9px;
+    --default-border-width: 2px;
+
+    --ui-font-size: 15px;
+    --ui-border-radius: 9px;
+    --ui-border-width: 2px;
+
+    --color-box-shadow: #000000;
+
+    --color-green-50: #f0f7e9;
+    --color-green-100: #e1efd3;
+    --color-green-200: #c3e0a7;
+    --color-green-300: #a5d17b;
+    --color-green-400: #85C44D;
+    --color-green-500: #6aab36;
+    --color-green-600: #598534;
+    --color-green-700: #4b6831;
+    --color-green-800: #3f4e2e;
+    --color-green-900: #33402a;
+    --color-green-950: #1a2214;
+
+    --color-brown-50: #f5f2f1;
+    --color-brown-100: #ebe3e1;
+    --color-brown-200: #d7c7c3;
+    --color-brown-300: #c0a59e;
+    --color-brown-400: #a07d75;
+    --color-brown-500: #836761;
+    --color-brown-600: #614f4b; /* Main */
+    --color-brown-700: #544542;
+    --color-brown-800: #46393a;
+    --color-brown-900: #3c3231;
+    --color-brown-950: #1e1716;
+
+    --color-blue-50: #f0f2f7;
+    --color-blue-100: #e2e5ee;
+    --color-blue-200: #c5cad9;
+    --color-blue-300: #a7afc5;
+    --color-blue-400: #7d89ac;
+    --color-blue-500: #4f5b82;
+    --color-blue-600: #3a4565;
+    --color-blue-700: #212636;
+    --color-blue-800: #1d202d;
+    --color-blue-900: #161921;
+    --color-blue-950: #0d0f16;
+
+    --color-yellow-50: #fcf9eb;
+    --color-yellow-100: #f8f0d6;
+    --color-yellow-200: #f1e3ad;
+    --color-yellow-300: #dec267;
+    --color-yellow-400: #d6af47;
+    --color-yellow-500: #ca9730;
+    --color-yellow-600: #b37928;
+    --color-yellow-700: #8e5823;
+    --color-yellow-800: #744525;
+    --color-yellow-900: #623b22;
+    --color-yellow-950: #391e11;
+
+    --color-sand-50: #fcfbf7;
+    --color-sand-100: #f8f7ed;
+    --color-sand-200: #f4f1da;
+    --color-sand-300: #e9e1b8;
+    --color-sand-400: #dccf8e;
+    --color-sand-500: #d0bb68;
+    --color-sand-600: #c1a34c;
+    --color-sand-700: #a2833e;
+    --color-sand-800: #846836;
+    --color-sand-900: #6c5630;
+    --color-sand-950: #3c2f19;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-brown-600);
+    color: #bfbfbf;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #85C44D;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3b3b3b;
+    border: 2px solid #85C44D;
+    border-radius: 9px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #171717;
+}
+
+::selection {
+    color: #171717;
+    background: #85C44D;
+}
