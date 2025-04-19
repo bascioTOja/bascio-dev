@@ -40,8 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { useAuthStore } from '~/stores/auth.store';
+// import { ref, onMounted } from 'vue';
 
 interface User {
   id: number | null;
@@ -55,31 +54,31 @@ const user = ref<User>({
   email: null,
 });
 
-onMounted(async () => {
-  try {
-    const response = await useFetch('/api/users/me');
-
-    if (response.data.value) {
-      user.value = {
-        id: response.data.value.id,
-        username: response.data.value.username,
-        email: response.data.value.email,
-      };
-    }
-  } catch (error) {
-    useToast().add({
-      title: 'Błąd',
-      description: 'Nie udało się pobrać danych profilu',
-      color: 'red',
-    });
-  }
-});
-
-const logout = async () => {
-  // const authStore = useAuthStore();
-  // await authStore.logout();
-  await navigateTo('/login');
-};
+// onMounted(async () => {
+//   try {
+//     const response = await useFetch('/api/users/me');
+//
+//     if (response.data.value) {
+//       user.value = {
+//         id: response.data.value.id,
+//         username: response.data.value.username,
+//         email: response.data.value.email,
+//       };
+//     }
+//   } catch (error) {
+//     useToast().add({
+//       title: 'Błąd',
+//       description: 'Nie udało się pobrać danych profilu',
+//       color: 'red',
+//     });
+//   }
+// });
+//
+// const logout = async () => {
+//   // const authStore = useAuthStore();
+//   // await authStore.logout();
+//   await navigateTo('/login');
+// };
 </script>
 
 <style lang="scss" scoped>

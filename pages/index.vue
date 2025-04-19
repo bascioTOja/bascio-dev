@@ -2,7 +2,7 @@
   <div class="container">
     <UCard class="mx-auto my-8 max-w-lg">
       <template #header>
-        <h1 class="text-xl font-bold">Bascio.dev</h1>
+        <h1 class="text-xl font-bold">Bascio.dev - You are currently {{ status }}.</h1>
       </template>
 
       <div class="space-y-6">
@@ -37,5 +37,5 @@
 </template>
 
 <script setup lang="ts">
-// Kod komponentu
+  const { status } = useAuth()
 </script>

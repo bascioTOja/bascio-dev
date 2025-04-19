@@ -84,11 +84,8 @@
 
 <script setup>
 import { ref, reactive } from 'vue';
-// import { useAuthStore } from '@/stores/auth.store';
-import { useRouter } from 'vue-router';
+const { signIn } = useAuth()
 
-const router = useRouter();
-// const authStore = useAuthStore();
 const isLoading = ref(false);
 const formError = ref('');
 
@@ -97,13 +94,22 @@ const form = reactive({
   password: ''
 });
 
-/**
- * Handles the login form submission
- * Attempts to authenticate the user with provided credentials
- */
 const doLogin = async () => {
   isLoading.value = true;
   formError.value = '';
+
+  const credentials = {
+    username: form.username,
+    password: form.password,
+  }
+
+  await signIn(credentials, { callbackUrl: '/' })
+
+  const res = await signIn(credentials)
+
+  console.log(res)
+  isLoading.value = false;
+
 
   // try {
   //   const loggedIn = await authStore.login({

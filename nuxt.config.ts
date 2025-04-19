@@ -27,14 +27,14 @@ export default defineNuxtConfig({
     provider: {
       type: 'local',
       endpoints: {
-        signIn: { path: '/jwt/create', method: 'post' },
-        signOut: false, // { path: '/jwt/logout', method: 'post' },
-        signUp: { path: '/users', method: 'post' },
-        getSession: { path: '/users/me', method: 'get' },
+        signIn: { path: '/jwt/create/', method: 'post' },
+        signOut: false, // { path: '/jwt/logou/', method: 'post' },
+        signUp: { path: '/users/', method: 'post' },
+        getSession: { path: '/users/me/', method: 'get' },
       },
       token: {
         signInResponseTokenPointer: '/access',
-        type: 'Bearer',
+        type: 'JWT',
         headerName: 'Authorization',
         cookieName: 'auth.jwttoken',
         maxAgeInSeconds: 86200, // 1 day - 200 seconds
@@ -44,8 +44,8 @@ export default defineNuxtConfig({
       },
       refresh: {
         isEnabled: true,
-        endpoint: { path: '/jwt/refresh', method: 'post' },
-        refreshOnlyToken: true,
+        endpoint: { path: '/jwt/refresh/', method: 'post' },
+        refreshOnlyToken: false,
         token: {
           signInResponseRefreshTokenPointer: '/refresh',
           refreshResponseTokenPointer: '/access',
@@ -69,7 +69,7 @@ export default defineNuxtConfig({
       },
     },
     sessionRefresh: {
-      enablePeriodically: true,
+      enablePeriodically: false,
       enableOnWindowFocus: true,
     }
   },
