@@ -1,188 +1,140 @@
 <template>
-  <div class="container">
+  <div class="container flex items-center justify-center">
     <UCard class="login-box">
-      <template #header>
-        <div class="text-center login-box-header">
-          <h5>
-            <NuxtLink to="/">
-              bascio<span class="text-primary">.dev</span>
-            </NuxtLink>
-          </h5>
-        </div>
-      </template>
+      <div class="login-box-header text-center">
+        <h2 class="text-xl">
+          Sing up to
+          <NuxtLink to="/" class="font-bold hover:opacity-90 transition-opacity duration-200;">
+            bascio<span class="text-green-400">.dev</span>
+          </NuxtLink>
+        </h2>
+      </div>
 
-      <form class="space-y-4" @submit.prevent="doRegister">
+      <UForm
+        :state="form"
+        class="space-y-4 pb-2"
+        @submit="doSignUp"
+      >
         <UAlert
           v-if="formError"
-          color="error"
+          color="red"
           variant="soft"
           icon="i-heroicons-exclamation-circle"
-        >
-          Proszę poprawić błędy w formularzu
-        </UAlert>
+          title="Authentication Error"
+          :description="formError"
+        />
 
-        <UFormGroup label="Nazwa użytkownika">
+        <UFormField label="Username" name="username">
           <UInput
             v-model="form.username"
-            name="username"
-            :color="errors.username ? 'error' : undefined"
-            tabindex="1"
+            class="w-full"
+            placeholder="Enter your username"
+            autocomplete="username"
+            :ui="{
+              base: 'auth-input',
+            }"
+            icon="i-heroicons-user"
           />
-          <template #hint v-if="errors.username">
-            <span class="text-red-500">{{ errors.username }}</span>
-          </template>
-        </UFormGroup>
+        </UFormField>
 
-        <UFormGroup label="Email">
+        <UFormField label="Email" name="email">
           <UInput
             v-model="form.email"
-            name="email"
-            type="email"
-            :color="errors.email ? 'error' : undefined"
-            tabindex="2"
+            class="w-full"
+            placeholder="Enter your email"
+            autocomplete="email"
+            :ui="{
+              base: 'auth-input',
+            }"
+            icon="i-heroicons-envelope"
           />
-          <template #hint v-if="errors.email">
-            <span class="text-red-500">{{ errors.email }}</span>
-          </template>
-        </UFormGroup>
+        </UFormField>
 
-        <UFormGroup label="Hasło">
+        <UFormField label="Password" name="password">
           <UInput
             v-model="form.password"
-            name="password"
+            class="w-full"
             type="password"
-            :color="errors.password ? 'error' : undefined"
-            tabindex="3"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            :ui="{
+              base: 'auth-input',
+            }"
+            icon="i-heroicons-lock-closed"
           />
-          <template #hint v-if="errors.password">
-            <span class="text-red-500">{{ errors.password }}</span>
-          </template>
-        </UFormGroup>
+        </UFormField>
 
-        <UFormGroup label="Powtórz hasło">
+        <UFormField label="Re-password" name="re_password">
           <UInput
             v-model="form.re_password"
-            name="re_password"
-            type="password"
-            :color="errors.re_password ? 'error' : undefined"
-            tabindex="4"
+            class="w-full"
+            type="re_password"
+            placeholder="Enter your password again"
+            autocomplete="current-password"
+            :ui="{
+              base: 'auth-input',
+            }"
+            icon="i-heroicons-lock-closed"
           />
-          <template #hint v-if="errors.re_password">
-            <span class="text-red-500">{{ errors.re_password }}</span>
-          </template>
-        </UFormGroup>
+        </UFormField>
 
-        <UButton type="submit" color="primary" block>
-          Zarejestruj się
-        </UButton>
-      </form>
+        <div class="pt-2">
+<!--          <UButton-->
+<!--            type="submit"-->
+<!--            color="green"-->
+<!--            variant="solid"-->
+<!--            block-->
+<!--            :loading="isLoading"-->
+<!--            size="lg"-->
+<!--          >-->
+<!--            Sign up-->
+<!--          </UButton>-->
+          <UButton
+            type="submit"
+            color="error"
+            variant="solid"
+            block
+            :loading="isLoading"
+            size="lg"
+          >
+            SIGN UP IS CLOSE
+          </UButton>
+        </div>
+      </UForm>
 
-      <div class="text-center mt-4">
-        <NuxtLink to="/login">Masz już konto?</NuxtLink>
+      <div class="text-center space-y-1">
+        <div>
+          <NuxtLink to="/login">Have an account?</NuxtLink>
+        </div>
       </div>
     </UCard>
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+<script setup>
+import { ref, reactive } from 'vue';
 
-const router = useRouter();
-const formError = ref(false);
+const isLoading = ref(false);
+const formError = ref('');
 
-interface FormData {
-  username: string;
-  email: string;
-  password: string;
-  re_password: string;
-}
-
-const form = ref<FormData>({
+const form = reactive({
   username: '',
   email: '',
   password: '',
   re_password: '',
 });
 
-const errors = ref({
-  username: '',
-  email: '',
-  password: '',
-  re_password: '',
-});
+const doSignUp = async () => {
+  isLoading.value = true;
+  formError.value = '';
 
-const validateForm = (): boolean => {
-  let isValid = true;
-  errors.value = {
-    username: '',
-    email: '',
-    password: '',
-    re_password: '',
-  };
-
-  if (!form.value.username.trim()) {
-    errors.value.username = 'Nazwa użytkownika jest wymagana';
-    isValid = false;
-  }
-
-  if (!form.value.email.trim()) {
-    errors.value.email = 'Email jest wymagany';
-    isValid = false;
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.value.email)) {
-    errors.value.email = 'Niepoprawny format email';
-    isValid = false;
-  }
-
-  if (!form.value.password) {
-    errors.value.password = 'Hasło jest wymagane';
-    isValid = false;
-  }
-
-  if (form.value.password !== form.value.re_password) {
-    errors.value.re_password = 'Hasła nie są identyczne';
-    isValid = false;
-  }
-
-  return isValid;
-};
-
-const doRegister = async () => {
-  formError.value = false;
-
-  if (!validateForm()) {
-    formError.value = true;
-    return;
-  }
-
-  try {
-    useToast().add({
-      title: 'Sukces',
-      description: 'Konto zostało utworzone',
-      color: 'green',
-    });
-
-    await router.push('/login');
-  } catch (error) {
-    formError.value = true;
-    useToast().add({
-      title: 'Błąd',
-      description: 'Nie udało się utworzyć konta',
-      color: 'error',
-    });
-  }
+  // isLoading.value = false;
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .container {
   margin-top: 20vh;
-  display: flex;
-  align-content: center;
-  justify-content: flex-start;
-  flex-wrap: nowrap;
-  flex-direction: column;
-  align-items: center;
 }
 
 .login-box-header {
@@ -193,6 +145,16 @@ const doRegister = async () => {
 
 .login-box {
   width: 325px;
+  background-color: #171717;
+  border-radius: var(--default-border-radius);
   margin: 20px;
+  -webkit-box-shadow: 0 6px 20px 0 var(--color-box-shadow);
+  -moz-box-shadow: 0 6px 20px 0 var(--color-box-shadow);
+  box-shadow: 0 6px 20px 0 var(--color-box-shadow);
+}
+
+.btn-login {
+  width: 100%;
+  margin-top: 10px;
 }
 </style>

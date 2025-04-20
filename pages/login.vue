@@ -105,28 +105,7 @@ const doLogin = async () => {
 
   await signIn(credentials, { callbackUrl: '/' })
 
-  const res = await signIn(credentials)
-
-  console.log(res)
   isLoading.value = false;
-
-
-  // try {
-  //   const loggedIn = await authStore.login({
-  //     username: form.username,
-  //     password: form.password,
-  //   });
-  //
-  //   if (loggedIn) {
-  //     await router.push('/tools');
-  //   } else {
-  //     formError.value = 'Invalid username or password. Please try again.';
-  //   }
-  // } catch (error) {
-  //   formError.value = error.message || 'An error occurred during login. Please try again.';
-  // } finally {
-  //   isLoading.value = false;
-  // }
 };
 </script>
 

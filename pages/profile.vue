@@ -1,105 +1,98 @@
 <template>
-  <div class="container">
-    <UCard class="login-box">
-      <template #header>
-        <div class="text-center login-box-header">
-          <h5>
-            <NuxtLink to="/">
-              bascio<span class="text-primary">.dev</span>
-            </NuxtLink>
-          </h5>
-        </div>
-      </template>
-
-      <div class="space-y-2">
-        <div class="grid grid-cols-2 gap-2">
-          <div class="font-medium">ID:</div>
-          <div>{{ user.id }}</div>
-
-          <div class="font-medium">Nazwa użytkownika:</div>
-          <div>{{ user.username }}</div>
-
-          <div class="font-medium">Email:</div>
-          <div>{{ user.email }}</div>
-        </div>
+  <div class="container flex items-center justify-center">
+    <UCard class="profile-box">
+      <div class="profile-box-header text-center">
+        <h2 class="text-xl">
+          User Profile on
+          <NuxtLink to="/" class="font-bold hover:opacity-90 transition-opacity duration-200;">
+            bascio<span class="text-green-400">.dev</span>
+          </NuxtLink>
+        </h2>
       </div>
 
-      <div class="text-center mt-4 space-y-2">
-        <NuxtLink to="/tools">
-          <UButton color="primary" variant="outline" block>
-            Narzędzia
-          </UButton>
-        </NuxtLink>
+      <div class="space-y-4 pb-4">
+        <UDivider />
 
-        <UButton color="red" variant="soft" block @click="logout">
-          Wyloguj się
-        </UButton>
+        <div class="flex flex-col items-center justify-center py-4">
+          <UAvatar
+            :src="`https://ui-avatars.com/api/?name=${userData.username}&background=random`"
+            size="xl"
+            class="mb-4"
+          />
+          <h3 class="text-xl font-bold">{{ userData.username }}</h3>
+          <p class="text-gray-400">
+            <UIcon name="i-heroicons-envelope" class="mr-1" />
+            {{ userData.email }}
+          </p>
+          <p class="text-gray-500 text-sm mt-1">
+            <UIcon name="i-heroicons-identification" class="mr-1" />
+            ID: {{ userData.id }}
+          </p>
+        </div>
+
+        <UDivider />
+
+        <div class="space-y-4 pt-2">
+          <UButton
+            to="/"
+            color="gray"
+            block
+            size="lg"
+            icon="i-heroicons-arrow-left"
+          >
+            Back to Dashboard
+          </UButton>
+
+          <UButton
+            color="red"
+            block
+            size="lg"
+            icon="i-heroicons-arrow-right-on-rectangle"
+            @click="logout"
+          >
+            Log Out
+          </UButton>
+        </div>
       </div>
     </UCard>
   </div>
 </template>
 
-<script setup lang="ts">
-// import { ref, onMounted } from 'vue';
+<script setup>
+import { ref } from 'vue';
+const { signOut } = useAuth();
 
-interface User {
-  id: number | null;
-  username: string | null;
-  email: string | null;
-}
 
-const user = ref<User>({
-  id: null,
-  username: null,
-  email: null,
+// User data from the provided JSON
+const userData = ref({
+  email: "admin@test.pl",
+  id: 2,
+  username: "admin"
 });
 
-// onMounted(async () => {
-//   try {
-//     const response = await useFetch('/api/users/me');
-//
-//     if (response.data.value) {
-//       user.value = {
-//         id: response.data.value.id,
-//         username: response.data.value.username,
-//         email: response.data.value.email,
-//       };
-//     }
-//   } catch (error) {
-//     useToast().add({
-//       title: 'Błąd',
-//       description: 'Nie udało się pobrać danych profilu',
-//       color: 'red',
-//     });
-//   }
-// });
-//
-// const logout = async () => {
-//   // const authStore = useAuthStore();
-//   // await authStore.logout();
-//   await navigateTo('/login');
-// };
+const logout = async () => {
+  await signOut({ callbackUrl: '/login' });
+};
 </script>
 
 <style lang="scss" scoped>
 .container {
   margin-top: 20vh;
-  display: flex;
-  align-content: center;
-  justify-content: flex-start;
-  flex-wrap: nowrap;
-  flex-direction: column;
-  align-items: center;
 }
 
-.login-box-header {
+.profile-box-header {
   padding: 10px;
   margin-bottom: 10px;
   font-weight: bolder;
 }
 
-.login-box {
-  width: 325px;
+.profile-box {
+  width: 375px;
+  background-color: #171717;
+  border-radius: var(--default-border-radius);
   margin: 20px;
+  -webkit-box-shadow: 0 6px 20px 0 var(--color-box-shadow);
+  -moz-box-shadow: 0 6px 20px 0 var(--color-box-shadow);
+  box-shadow: 0 6px 20px 0 var(--color-box-shadow);
 }
 </style>

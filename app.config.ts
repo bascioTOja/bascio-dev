@@ -6,13 +6,15 @@ export default defineAppConfig({
       success: 'green',
       info: 'blue',
       warning: 'yellow',
-      error: 'brown',
+      error: 'red',
       neutral: 'neutral',
       green: 'green',
       blue: 'blue',
       yellow: 'yellow',
       brown: 'brown',
       sand: 'sand',
+      red: 'red',
+      gray: 'gray',
     },
 
     rounded: {
