@@ -11,7 +11,7 @@
       </div>
 
       <div class="space-y-4 pb-4">
-        <UDivider />
+        <USeparator />
 
         <div class="flex flex-col items-center justify-center py-4">
           <UAvatar
@@ -30,7 +30,7 @@
           </p>
         </div>
 
-        <UDivider />
+        <USeparator />
 
         <div class="space-y-4 pt-2">
           <UButton
