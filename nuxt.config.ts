@@ -66,7 +66,7 @@ export default defineNuxtConfig({
         },
       },
       pages: {
-        login: '/login'
+        login: '/auth/login'
       },
     },
     sessionRefresh: {
