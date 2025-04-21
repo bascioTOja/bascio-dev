@@ -22,6 +22,7 @@ export default defineNuxtConfig({
 
   auth: {
     isEnabled: true,
+    globalAppMiddleware: true,
     disableServerSideAuth: false,
     originEnvKey: 'NUXT_BASE_URL',
     provider: {

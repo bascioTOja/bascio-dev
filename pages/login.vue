@@ -67,13 +67,13 @@
 
       <div class="text-center space-y-1">
         <div>
-          <NuxtLink to="/forgot-password" class="transition-colors duration-200">
+          <NuxtLink to="/forgot-password">
             Forgot your password?
           </NuxtLink>
         </div>
         <div>
           Don't have an account?
-          <NuxtLink to="/register" class="transition-colors duration-200">
+          <NuxtLink to="/register" class="text-green-400">
             Sign up
           </NuxtLink>
         </div>
@@ -84,8 +84,15 @@
 
 <script setup>
 import { ref, reactive } from 'vue';
-const { signIn } = useAuth()
 
+definePageMeta({
+  auth: {
+    unauthenticatedOnly: true,
+    navigateAuthenticatedTo: '/profile',
+  }
+})
+
+const { signIn } = useAuth()
 const isLoading = ref(false);
 const formError = ref('');
 

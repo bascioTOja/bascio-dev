@@ -114,6 +114,13 @@
 <script setup>
 import { ref, reactive } from 'vue';
 
+definePageMeta({
+  auth: {
+    unauthenticatedOnly: true,
+    navigateAuthenticatedTo: '/profile',
+  }
+})
+
 const isLoading = ref(false);
 const formError = ref('');
 

@@ -22,7 +22,7 @@
     --color-green-100: #e1efd3;
     --color-green-200: #c3e0a7;
     --color-green-300: #a5d17b;
-    --color-green-400: #85C44D;
+    --color-green-400: #85C44D; /* Main */
     --color-green-500: #6aab36;
     --color-green-600: #598534;
     --color-green-700: #4b6831;
@@ -83,7 +83,7 @@ html, body {
     margin: 0;
     padding: 0;
     background-color: var(--color-brown-600);
-    color: #bfbfbf;
+    color: var(--ui-text);
 }
 
 ::-webkit-scrollbar {
@@ -91,20 +91,20 @@ html, body {
 }
 
 ::-webkit-scrollbar-track {
-    background: #85C44D;
+    background: var(--color-green-400);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #3b3b3b;
-    border: 2px solid #85C44D;
+    background: var(--ui-border);
+    border: 2px solid var(--color-green-400);
     border-radius: 9px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #171717;
+    background: var(--ui-bg);
 }
 
 ::selection {
-    color: #171717;
-    background: #85C44D;
+    color: var(--ui-bg);
+    background: var(--color-green-400);
 }

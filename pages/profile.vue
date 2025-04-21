@@ -58,21 +58,18 @@
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue';
-const { signOut } = useAuth();
+<script lang="ts" setup>
+  const { data, signOut } = useAuth();
 
+  const userData = computed(() => ({
+    id: data?.value?.id || null,
+    email: data?.value?.email || null,
+    username: data?.value?.username || null,
+  }));
 
-// User data from the provided JSON
-const userData = ref({
-  email: "admin@test.pl",
-  id: 2,
-  username: "admin"
-});
-
-const logout = async () => {
-  await signOut({ callbackUrl: '/login' });
-};
+  const logout = async () => {
+    await signOut({ callbackUrl: '/login' });
+  };
 </script>
 
 <style lang="scss" scoped>
