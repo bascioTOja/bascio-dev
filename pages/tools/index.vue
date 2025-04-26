@@ -1,14 +1,16 @@
 <template>
   <Tools>
-    <ToolCard
-      v-for="tool in tools"
-      :key="tool.code"
-      :code="tool.code"
-      :title="tool.title"
-      :description="tool.description"
-      :color="tool.color"
-      :url_target="tool.url_target"
-    />
+    <div class="tools-wrapper">
+      <ToolCard
+        v-for="tool in tools"
+        :key="tool.code"
+        :code="tool.code"
+        :title="tool.title"
+        :description="tool.description"
+        :color="tool.color"
+        :url_target="tool.url_target"
+      />
+    </div>
   </Tools>
 </template>
 
@@ -49,4 +51,15 @@ if (tools.value.length === 0) {
 </script>
 
 <style scoped lang="scss">
+.tools-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  flex-direction: row;
+  justify-content: space-between;
+  @media (max-width: 768px) {
+    justify-content: space-around;
+  }
+}
+
 </style>

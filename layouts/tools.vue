@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    <div class="content p-4 flex flex-wrap md:justify-start justify-center items-stretch">
+    <div class="p-4">
       <slot />
     </div>
   </div>
