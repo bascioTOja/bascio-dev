@@ -102,7 +102,7 @@
 
 <script setup>
 import { ref, reactive } from 'vue';
-import Auth from '~/layouts/Auth.vue';
+import Auth from '~/layouts/auth.vue';
 
 definePageMeta({
   auth: {

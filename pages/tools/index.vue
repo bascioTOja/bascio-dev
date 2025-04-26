@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import Tools from '~/layouts/Tools.vue';
+import Tools from '~/layouts/tools.vue';
 import ToolCard from '~/components/ToolCard.vue';
 import useApiFetch from '~/utils/apiFetch';
 
