@@ -1,17 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { process } from 'std-env';
 
-interface SessionData {
-  id: string | number
-  firstName: string
-  lastName: string
-}
-
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
 
-  modules: ['@nuxt/eslint', '@nuxt/fonts', '@nuxt/icon', '@nuxt/ui', '@nuxt/image', '@pinia/nuxt', '@sidebase/nuxt-auth'],
+  modules: ['@nuxt/eslint', '@nuxt/fonts', '@nuxt/icon', '@nuxt/ui', '@nuxt/image', '@pinia/nuxt', '@sidebase/nuxt-auth', '@nuxt/scripts'],
   css: ['~/assets/css/main.css'],
 
   runtimeConfig: {

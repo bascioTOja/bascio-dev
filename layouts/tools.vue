@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto mt-[5vh] min-h-[85vh] bg-(--ui-bg) rounded-(--default-border-radius) pr-[.75rem] pl-[.75rem] shadow-default">
+  <UContainer class="mx-auto mt-[5vh] min-h-[85vh] bg-(--ui-bg) rounded-(--default-border-radius) pr-[.75rem] pl-[.75rem] shadow-default">
     <div class="content-header border-b border-dashed border-(--ui-border) p-3 flex flex-wrap justify-between items-center">
       <div class="btn-link">
         <NuxtLink to="/" class="font-bold hover:opacity-90 transition-opacity duration-200">
@@ -42,7 +42,7 @@
     <div class="p-4">
       <slot />
     </div>
-  </div>
+  </UContainer>
 </template>
 
 <script setup lang="ts">

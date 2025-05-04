@@ -1,11 +1,10 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 
-@theme static {
+:root {
     --font-sans: 'Quicksand', sans-serif;
     --ui-bg: #171717;
     --ui-border: #3b3b3b;
-
     --ui-text: #bfbfbf;
 
     --default-font-size: 15px;
@@ -16,7 +15,7 @@
     --ui-border-radius: 9px;
     --ui-border-width: 2px;
 
-    --ui-container: 1320px;
+    --ui-container: 90.5rem;
 
     --color-box-shadow: #000000;
 

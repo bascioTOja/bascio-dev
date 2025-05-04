@@ -1,12 +1,3 @@
-<script setup lang="ts">
-defineProps({
-  title: {
-    type: String,
-    default: ''
-  }
-})
-</script>
-
 <template>
   <div class="container flex items-center justify-center">
     <UCard class="login-box">
@@ -28,9 +19,18 @@ defineProps({
   </div>
 </template>
 
+<script setup lang="ts">
+defineProps({
+  title: {
+    type: String,
+    default: ''
+  }
+})
+</script>
+
 <style scoped lang="scss">
 .container {
-  margin-top: 20vh;
+  margin-top: -10vh;
 }
 
 .login-box-header {
