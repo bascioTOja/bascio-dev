@@ -25,14 +25,15 @@ interface ToolCardProps {
 const props = defineProps<ToolCardProps>();
 
 async function handleClick() {
+  const link = props.code.startsWith('snake') ? `/${props.code}` : `/tools/${props.code}`;
   if (props.url_target) {
-    await navigateTo(`/${props.code}`, {
+    await navigateTo(link, {
       open: {
         target: props.url_target,
       }
     });
   } else {
-    await navigateTo(`/${props.code}`);
+    await navigateTo(link);
   }
 }
 </script>
