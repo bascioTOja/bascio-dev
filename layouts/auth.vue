@@ -30,7 +30,7 @@ defineProps({
 
 <style scoped lang="scss">
 .container {
-  margin-top: -10vh;
+  margin-top: 16vh;
 }
 
 .login-box-header {
