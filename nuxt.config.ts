@@ -24,7 +24,7 @@ export default defineNuxtConfig({
       type: 'local',
       endpoints: {
         signIn: { path: '/jwt/create/', method: 'post' },
-        signOut: false, // { path: '/jwt/logou/', method: 'post' },
+        signOut: false, // { path: '/jwt/logout/', method: 'post' },
         signUp: { path: '/users/', method: 'post' },
         getSession: { path: '/users/me/', method: 'get' },
       },
