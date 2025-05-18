@@ -23,13 +23,14 @@
 <script setup lang="ts">
 import Tools from '~/layouts/tools.vue';
 import useApiFetch from '~/utils/apiFetch';
-import { ref, reactive, onMounted } from 'vue';
+import { ref, reactive, onMounted, h } from 'vue';
 
 interface ShortUrl {
   id: number;
   name: string;
   slug: string;
   long_url: string;
+  short_url: string;
   views: number;
   created_at: string;
   updated_at: string;
@@ -40,20 +41,22 @@ const errorMsg = ref('');
 const formState = reactive({ name: '', slug: '', long_url: '' });
 
 const columns = [
-  { id: 'id', label: 'ID' },
-  { id: 'name', label: 'Nazwa' },
-  { id: 'slug', label: 'Slug' },
-  { id: 'long_url', label: 'Pełny URL' },
-  { id: 'views', label: 'Wyświetlenia' },
-  { id: 'created_at', label: 'Utworzono' },
-  { id: 'updated_at', label: 'Zaktualizowano' },
+  { id: 'id', label: 'ID', accessorKey: 'id', header: '#' },
+  { id: 'name', label: 'Nazwa', accessorKey: 'name' },
+  { id: 'slug', label: 'Slug', accessorKey: 'slug' },
+  { id: 'short_url', label: 'Skrócony URL', accessorKey: 'short_url',
+    cell: ({ row }: any) => h('a', { href: row.original.short_url, target: '_blank', class: 'text-primary underline' }, row.original.short_url)
+  },
+  { id: 'long_url', label: 'Pełny URL', accessorKey: 'long_url',
+    cell: ({ row }: any) => h('a', { href: row.original.long_url, target: '_blank', class: 'text-muted underline' }, row.original.long_url)
+  },
+  { id: 'views', label: 'Wyświetlenia', accessorKey: 'views' },
   { id: 'actions', label: 'Akcje', slot: 'actions' },
 ];
 
 const fetchShortUrls = async () => {
   try {
     const { data } = await useApiFetch()('urlshortener/shorturls/');
-    // Upewniamy się, że mamy tablicę obiektów i przypisujemy ją bezpośrednio
     shorturls.value = Array.isArray(data.value) ? data.value : [];
     console.log('Pobrane dane:', shorturls.value);
   } catch (e) {
