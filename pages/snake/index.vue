@@ -13,12 +13,12 @@
 
 <script setup>
 import { onBeforeUnmount } from 'vue';
-import { Board } from './src/board.js';
-import { Vector } from './src/vector';
-import { Food } from './src/food';
-import { Snake } from './src/snake';
-import { directionMap } from './src/directions_map';
-import { Score } from './src/score';
+import { Board } from '~/utils/snake/board.js'
+import { Vector } from '~/utils/snake/vector.js'
+import { Food }   from '~/utils/snake/food.js'
+import { Snake }  from '~/utils/snake/snake.js'
+import { directionMap } from '~/utils/snake/directions_map.js'
+import { Score }  from '~/utils/snake/score.js'
 
 definePageMeta({
   auth: false,

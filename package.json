@@ -6,6 +6,7 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
+    "serve": "npx serve .output/public",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
@@ -16,6 +17,7 @@
     "@nuxt/image": "^1.10.0",
     "@nuxt/ui": "^3.0.2",
     "eslint": "^9.24.0",
+    "js-confetti": "^0.12.0",
     "nuxt": "^3.16.2",
     "typescript": "^5.8.3",
     "vue": "^3.5.13",

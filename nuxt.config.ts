@@ -4,6 +4,7 @@ import { process } from 'std-env';
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
+  ssr: true,
 
   modules: ['@nuxt/eslint', '@nuxt/fonts', '@nuxt/icon', '@nuxt/ui', '@nuxt/image', '@pinia/nuxt', '@sidebase/nuxt-auth', '@nuxt/scripts', '@tresjs/nuxt'],
   css: ['~/assets/css/main.css'],
