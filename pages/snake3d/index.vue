@@ -4,11 +4,11 @@
 import * as THREE from 'three';
 
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { Board } from './src/board.js';
-import { Vector } from './src/vector.js';
-import { Food } from './src/food.js';
-import { directionMap } from './src/directions_map.js';
-import { Snake } from './src/snake.js';
+import { Board } from '~/utils/snake3d/board.js';
+import { Vector } from '~/utils/snake3d/vector.js';
+import { Food } from '~/utils/snake3d/food.js';
+import { directionMap } from '~/utils/snake3d/directions_map.js';
+import { Snake } from '~/utils/snake3d/snake.js';
 import { onMounted } from 'vue';
 
 definePageMeta({

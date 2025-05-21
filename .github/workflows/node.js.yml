@@ -25,7 +25,7 @@ jobs:
       run: npm ci
 
     - name: Run tests
-      run: echo "TODO:Test"  # Zamień na np. npm run test:unit -- --ci --coverage
+      run: echo "TODO:Test"
 
     - name: Build project
       run: npm run build:prod
