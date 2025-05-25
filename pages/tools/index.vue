@@ -2,7 +2,7 @@
   <Tools>
     <div class="tools-wrapper">
       <ToolCard
-        v-for="tool in tools"
+        v-for="tool in tools || []"
         :key="tool.code"
         :code="tool.code"
         :title="tool.title"
@@ -18,6 +18,7 @@
 import Tools from '~/layouts/tools.vue';
 import ToolCard from '~/components/ToolCard.vue';
 import useApiFetch from '~/utils/apiFetch';
+import { onMounted } from 'vue';
 
 definePageMeta({
   auth: false,
@@ -33,21 +34,18 @@ interface Tool {
 
 const tools = ref<Tool[]>([]);
 
-const fetchTools = async () => {
+onMounted(async () => {
   try {
     const { data } = await useApiFetch()('tools/');
-    if (data.value) {
+    if (data && data.value) {
       tools.value = Object.values(data.value) as Tool[];
+    } else {
+      tools.value = [];
     }
   } catch (error) {
-    console.error('Error fetching tools:', error);
     tools.value = [];
   }
-};
-
-if (tools.value.length === 0) {
-  await fetchTools();
-}
+});
 </script>
 
 <style scoped lang="scss">
