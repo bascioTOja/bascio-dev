@@ -34,9 +34,9 @@ jobs:
       uses: appleboy/scp-action@master
       with:
         host: ${{ secrets.HOST }}
-        user: ${{ secrets.USERNAME }}
+        username: ${{ secrets.USERNAME }}
         key: ${{ secrets.SSH_KEY }}
-        src: "./.output/public/*"
+        source: "./.output/public/*"
         target: ${{ secrets.TARGET }}
         strip_components: 1
 
