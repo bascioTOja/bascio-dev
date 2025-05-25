@@ -38,7 +38,8 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         source: "./.output/public/*"
         target: ${{ secrets.TARGET }}
-        strip_components: 1
+        strip_components: 2
+        rm: true
 
     - name: Clean up
       run: rm -rf node_modules
