@@ -58,9 +58,7 @@ const fetchShortUrls = async () => {
   try {
     const { data } = await useApiFetch()('urlshortener/shorturls/');
     shorturls.value = Array.isArray(data.value) ? data.value : [];
-    console.log('Pobrane dane:', shorturls.value);
   } catch (e) {
-    console.error('Błąd fetchShortUrls:', e);
     errorMsg.value = 'Błąd pobierania linków.';
   }
 };
