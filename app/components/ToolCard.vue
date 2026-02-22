@@ -12,24 +12,22 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue';
-
 interface ToolCardProps {
   code: string;
   title: string;
   description: string;
   color: string;
-  url_target?: string;
+  urlTarget?: string;
 }
 
 const props = defineProps<ToolCardProps>();
 
 async function handleClick() {
   const link = props.code.startsWith('snake') ? `/${props.code}` : `/tools/${props.code}`;
-  if (props.url_target) {
+  if (props.urlTarget) {
     await navigateTo(link, {
       open: {
-        target: props.url_target,
+        target: props.urlTarget,
       }
     });
   } else {

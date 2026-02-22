@@ -8,7 +8,7 @@
         :title="tool.title"
         :description="tool.description"
         :color="tool.color"
-        :url_target="tool.url_target"
+        :url-target="tool.url_target"
       />
     </div>
   </Tools>
@@ -42,7 +42,7 @@ onMounted(async () => {
     } else {
       tools.value = [];
     }
-  } catch (error) {
+  } catch {
     tools.value = [];
   }
 });
