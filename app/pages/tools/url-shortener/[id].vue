@@ -6,26 +6,26 @@
     <div v-else-if="errorMsg">
       <UAlert color="red">{{ errorMsg }}</UAlert>
       <NuxtLink to="/tools/url-shortener">
-        <UButton class="mt-4">Powrót</UButton>
+        <UButton class="mt-4">Back</UButton>
       </NuxtLink>
     </div>
     <div v-else>
       <UForm :state="formState" class="max-w-xl mx-auto mt-6 flex flex-col gap-4" @submit="onUpdate">
-        <UInput v-model="formState.name" label="Nazwa" required />
+        <UInput v-model="formState.name" label="Name" required />
         <UInput v-model="formState.slug" label="Slug" required />
-        <UInput v-model="formState.long_url" label="Pełny URL" required />
+        <UInput v-model="formState.long_url" label="Full URL" required />
         <div class="flex gap-2 mt-2">
-          <UButton type="submit" color="green">Zapisz zmiany</UButton>
+          <UButton type="submit" color="green">Save changes</UButton>
           <NuxtLink to="/tools/url-shortener">
-            <UButton color="gray">Powrót</UButton>
+            <UButton color="gray">Back</UButton>
           </NuxtLink>
         </div>
       </UForm>
       <div class="mt-6 text-sm text-gray-500">
         <div>ID: {{ shorturl.id }}</div>
-        <div>Wyświetlenia: {{ shorturl.views }}</div>
-        <div>Utworzono: {{ shorturl.created_at }}</div>
-        <div>Ostatnia edycja: {{ shorturl.updated_at }}</div>
+        <div>Views: {{ shorturl.views }}</div>
+        <div>Created at: {{ shorturl.created_at }}</div>
+        <div>Last updated: {{ shorturl.updated_at }}</div>
       </div>
       <UAlert v-if="successMsg" color="green" class="mt-4">{{ successMsg }}</UAlert>
       <UAlert v-if="errorMsg && !loading" color="red" class="mt-4">{{ errorMsg }}</UAlert>
@@ -39,13 +39,24 @@ import useApiFetch from '~/utils/apiFetch';
 import { ref, reactive, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 
+interface ShortUrl {
+  id: number;
+  name: string;
+  slug: string;
+  long_url: string;
+  short_url: string;
+  views: number;
+  created_at: string;
+  updated_at: string;
+}
+
 const route = useRoute();
 const id = route.params.id;
 
 const loading = ref(true);
 const errorMsg = ref('');
 const successMsg = ref('');
-const shorturl = ref<any>({});
+const shorturl = ref<ShortUrl>({} as ShortUrl);
 const formState = reactive({ name: '', slug: '', long_url: '' });
 
 const fetchShortUrl = async () => {
@@ -54,15 +65,15 @@ const fetchShortUrl = async () => {
   try {
     const { data } = await useApiFetch()(`urlshortener/shorturls/${id}/`);
     if (data.value) {
-      shorturl.value = data.value;
-      formState.name = data.value.name;
-      formState.slug = data.value.slug;
-      formState.long_url = data.value.long_url;
+      shorturl.value = data.value as ShortUrl;
+      formState.name = (data.value as ShortUrl).name;
+      formState.slug = (data.value as ShortUrl).slug;
+      formState.long_url = (data.value as ShortUrl).long_url;
     } else {
-      errorMsg.value = 'Nie znaleziono linku.';
+      errorMsg.value = 'Link not found.';
     }
-  } catch (e) {
-    errorMsg.value = 'Błąd pobierania szczegółów.';
+  } catch {
+    errorMsg.value = 'Error fetching details.';
   } finally {
     loading.value = false;
   }
@@ -77,11 +88,11 @@ const onUpdate = async () => {
       body: { ...formState },
     });
     if (data.value) {
-      successMsg.value = 'Zaktualizowano!';
-      shorturl.value = data.value;
+      successMsg.value = 'Updated successfully!';
+      shorturl.value = data.value as ShortUrl;
     }
-  } catch (e) {
-    errorMsg.value = 'Błąd zapisu zmian.';
+  } catch {
+    errorMsg.value = 'Error saving changes.';
   }
 };
 

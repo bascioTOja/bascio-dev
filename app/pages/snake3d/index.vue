@@ -1,4 +1,6 @@
-<template></template>
+<template>
+  <div id="snake3d-root" />
+</template>
 
 <script setup>
 import * as THREE from 'three';
@@ -34,7 +36,7 @@ onMounted(() => {
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
 
-  const orbitControls = new OrbitControls(camera, renderer.domElement);
+  const _orbitControls = new OrbitControls(camera, renderer.domElement);
 
   const light = new THREE.HemisphereLight(0xffffff, 0x4444);
   scene.add(light);
@@ -56,7 +58,7 @@ onMounted(() => {
   let snake = getNewSnake();
   board.tiles.add(snake.segments);
 
-  window.addEventListener('resize', (e) => {
+  window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);

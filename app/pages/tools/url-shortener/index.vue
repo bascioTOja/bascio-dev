@@ -2,18 +2,18 @@
   <Tools>
     <div class="mb-6">
       <UForm :state="formState" class="flex flex-wrap gap-2 items-end" @submit="onCreate">
-        <UInput v-model="formState.name" placeholder="Nazwa" class="w-40" required />
-        <UInput v-model="formState.slug" placeholder="Slug (np. moj-link)" class="w-40" required />
-        <UInput v-model="formState.long_url" placeholder="Pełny URL" class="w-80" required />
-        <UButton type="submit" color="green">Dodaj</UButton>
+        <UInput v-model="formState.name" placeholder="Name" class="w-40" required />
+        <UInput v-model="formState.slug" placeholder="Slug (e.g. my-link)" class="w-40" required />
+        <UInput v-model="formState.long_url" placeholder="Full URL" class="w-80" required />
+        <UButton type="submit" color="green">Add</UButton>
       </UForm>
     </div>
     <UTable :data="shorturls" :columns="columns" class="mb-4">
       <template #actions="{ row }">
         <NuxtLink :to="`/tools/url-shortener/${row.id}`">
-          <UButton size="xs" color="gray">Edytuj</UButton>
+          <UButton size="xs" color="gray">Edit</UButton>
         </NuxtLink>
-        <UButton size="xs" color="red" class="ml-2" @click="onDelete(row.id)">Usuń</UButton>
+        <UButton size="xs" color="red" class="ml-2" @click="onDelete(Number(row.id))">Delete</UButton>
       </template>
     </UTable>
     <UAlert v-if="errorMsg" color="red" class="mt-2">{{ errorMsg }}</UAlert>
@@ -36,30 +36,34 @@ interface ShortUrl {
   updated_at: string;
 }
 
+interface CellContext {
+  row: { original: ShortUrl };
+}
+
 const shorturls = ref<ShortUrl[]>([]);
 const errorMsg = ref('');
 const formState = reactive({ name: '', slug: '', long_url: '' });
 
 const columns = [
   { id: 'id', label: 'ID', accessorKey: 'id', header: '#' },
-  { id: 'name', label: 'Nazwa', accessorKey: 'name' },
+  { id: 'name', label: 'Name', accessorKey: 'name' },
   { id: 'slug', label: 'Slug', accessorKey: 'slug' },
-  { id: 'short_url', label: 'Skrócony URL', accessorKey: 'short_url',
-    cell: ({ row }: any) => h('a', { href: row.original.short_url, target: '_blank', class: 'text-primary underline' }, row.original.short_url)
+  { id: 'short_url', label: 'Short URL', accessorKey: 'short_url',
+    cell: ({ row }: CellContext) => h('a', { href: row.original.short_url, target: '_blank', class: 'text-primary underline' }, row.original.short_url)
   },
-  { id: 'long_url', label: 'Pełny URL', accessorKey: 'long_url',
-    cell: ({ row }: any) => h('a', { href: row.original.long_url, target: '_blank', class: 'text-muted underline' }, row.original.long_url)
+  { id: 'long_url', label: 'Full URL', accessorKey: 'long_url',
+    cell: ({ row }: CellContext) => h('a', { href: row.original.long_url, target: '_blank', class: 'text-muted underline' }, row.original.long_url)
   },
-  { id: 'views', label: 'Wyświetlenia', accessorKey: 'views' },
-  { id: 'actions', label: 'Akcje', slot: 'actions' },
+  { id: 'views', label: 'Views', accessorKey: 'views' },
+  { id: 'actions', label: 'Actions', slot: 'actions' },
 ];
 
 const fetchShortUrls = async () => {
   try {
     const { data } = await useApiFetch()('urlshortener/shorturls/');
     shorturls.value = Array.isArray(data.value) ? data.value : [];
-  } catch (e) {
-    errorMsg.value = 'Błąd pobierania linków.';
+  } catch {
+    errorMsg.value = 'Error fetching links.';
   }
 };
 
@@ -71,13 +75,13 @@ const onCreate = async () => {
       body: { ...formState },
     });
     if (data.value) {
-      shorturls.value.push(data.value);
+      shorturls.value.push(data.value as ShortUrl);
       formState.name = '';
       formState.slug = '';
       formState.long_url = '';
     }
-  } catch (e) {
-    errorMsg.value = 'Błąd dodawania linku.';
+  } catch {
+    errorMsg.value = 'Error adding link.';
   }
 };
 
@@ -86,8 +90,8 @@ const onDelete = async (id: number) => {
   try {
     await useApiFetch()(`urlshortener/shorturls/${id}/`, { method: 'DELETE' });
     shorturls.value = shorturls.value.filter((s) => s.id !== id);
-  } catch (e) {
-    errorMsg.value = 'Błąd usuwania linku.';
+  } catch {
+    errorMsg.value = 'Error removing link.';
   }
 };
 

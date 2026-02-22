@@ -2,7 +2,7 @@
 import { process } from 'std-env';
 
 export default defineNuxtConfig({
-  compatibilityDate: '2024-11-01',
+  compatibilityDate: '2026-02-22',
   devtools: { enabled: true },
   debug: process.env.DEBUG === "true",
   ssr: true,
