@@ -4,13 +4,17 @@ on:
   workflow_dispatch:
     inputs:
       environment:
-        description: 'bascio.dev'
+        description: 'Environment'
         required: true
         default: 'basciodev'
+        type: choice
+        options:
+          - basciodev
 
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
