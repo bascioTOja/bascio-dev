@@ -6,7 +6,7 @@ on:
       environment:
         description: 'bascio.dev'
         required: true
-        default: 'production'
+        default: 'basciodev'
 
 jobs:
   build_and_deploy:
@@ -27,6 +27,16 @@ jobs:
     - name: Run tests
       run: echo "TODO:Test"
 
+    - name: Create .env from secrets
+      run: |
+        cat <<EOF > .env
+        DEBUG=${{ secrets.DEBUG }}
+        BASE_URL=${{ secrets.BASE_URL }}
+        NUXT_PUBLIC_API_BASE=${{ secrets.NUXT_PUBLIC_API_BASE }}
+        NUXT_BASE_URL=${{ secrets.NUXT_BASE_URL }}
+        API_DOMAIN=${{ secrets.API_DOMAIN }}
+        EOF
+
     - name: Build project
       run: npm run generate
 
@@ -42,7 +52,7 @@ jobs:
         rm: true
 
     - name: Clean up
-      run: rm -rf node_modules
+      run: rm -rf node_modules .env
 
     - name: Notify on success
       if: success()
