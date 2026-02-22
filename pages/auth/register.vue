@@ -58,7 +58,7 @@
         <UInput
           v-model="form.re_password"
           class="w-full"
-          type="re_password"
+          type="password"
           placeholder="Enter your password again"
           autocomplete="current-password"
           :ui="{
@@ -87,7 +87,7 @@
           :loading="isLoading"
           size="lg"
         >
-          SIGN UP IS CLOSE
+          SIGN UP IS CLOSED
         </UButton>
       </div>
     </UForm>

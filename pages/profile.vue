@@ -68,7 +68,7 @@
   }));
 
   const logout = async () => {
-    await signOut({ callbackUrl: '/login' });
+    await signOut({ callbackUrl: '/auth/login' });
   };
 </script>
 

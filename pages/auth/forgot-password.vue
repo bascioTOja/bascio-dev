@@ -5,7 +5,7 @@
     <UForm
       :state="form"
       class="space-y-4 pb-2"
-      @submit="doLogin"
+      @submit="doRecover"
     >
       <UAlert
         v-if="formError"
@@ -77,7 +77,7 @@ const form = reactive({
   email: '',
 });
 
-const doLogin = async () => {
+const doRecover = async () => {
   isLoading.value = true;
   formError.value = '';
 

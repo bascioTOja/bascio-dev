@@ -57,6 +57,8 @@ export default defineNuxtConfig({
       session: {
         dataType: {
           id: 'string | number',
+          email: 'string',
+          username: 'string',
           firstName: 'string',
           lastName: 'string',
         },
